@@ -56,3 +56,6 @@ useradd -G nautilus_admin_users stark
 cat /etc/passwd |grep stark
 id stark
 
+
+#Commit to Git
+git add .; git commit -m "initial"; git push

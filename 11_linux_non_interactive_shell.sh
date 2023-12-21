@@ -1,4 +1,4 @@
-#create a user named jim with a non-interactive shell on the App Server 2.
+#Create a user named jim with a non-interactive shell on the App Server 2.
 #APP Server 2
 
 #login

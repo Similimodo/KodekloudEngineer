@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd
+spec:
+  replicas: 1  # Adjust if you need more than one pod running
+  selector:
+    matchLabels:
+      app: httpd  # This pod selector ensures the deployment manages pods with this label
+  template:
+    metadata:
+      labels:
+        app: httpd  # Labels for the pods managed by the deployment
+    spec:
+      containers:
+      - name: httpd-container
+        image: httpd:latest
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "256Mi"       
+
+# kubectl create deployment httpd --image=httpd:latest --dry-run=client -o yaml > httpd-deployment.yaml

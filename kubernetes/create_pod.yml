@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-httpd
+  labels:
+    app: httpd_app
+spec:
+  containers:
+  - name: httpd-container
+    image: httpd:latest
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "256Mi"
+
+# Or
+
+# #kubectl run pod pod-httpd --image=httpd:latest --labels=app=httpd_app --dry-run=client -o yaml > pod-httpd.yaml

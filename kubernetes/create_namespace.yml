@@ -1,0 +1,21 @@
+# Namespace Creation
+
+kubectl create namespace dev
+
+# For Pods Creation
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dev-nginx-pod
+  namespace: dev
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "256Mi"
+
+# Or
+# kubectl run dev-nginx-pod --image=nginx:latest --namespace=dev

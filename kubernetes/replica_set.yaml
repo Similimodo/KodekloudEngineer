@@ -1,0 +1,31 @@
+# Create a file named nginx-replicaset.yaml
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-replicaset
+  labels:
+    app: nginx_app
+    type: front-end
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginx_app
+  template:
+    metadata:
+      labels:
+        app: nginx_app
+        type: front-end
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+
+# Deploy the file with
+kubectl apply -f nginx-replicaset.yaml
+
+# VERIFY
+kubectl get replicaset
+kubectl get pods -l app=nginx_app
+

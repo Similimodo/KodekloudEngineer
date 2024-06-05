@@ -1,0 +1,8 @@
+# Check the revision history of the deployment:
+kubectl rollout history deployment/nginx-deployment
+
+# Rollback to the Previous Revision:
+kubectl rollout undo deployment/nginx-deployment
+
+# Verify the Rollback
+kubectl rollout status deployment/nginx-deployment

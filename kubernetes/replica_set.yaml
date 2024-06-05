@@ -28,4 +28,3 @@ kubectl apply -f nginx-replicaset.yaml
 # VERIFY
 kubectl get replicaset
 kubectl get pods -l app=nginx_app
-

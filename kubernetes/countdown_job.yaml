@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: countdown-xfusion
+spec:
+  template:
+    metadata:
+      name: countdown-xfusion
+    spec:
+      containers:
+      - name: container-countdown-xfusion
+        image: debian:latest
+        command: ["sleep", "5"]
+      restartPolicy: Never
+
+# Deploy
+kubectl apply -f countdown_job.yaml
+
+# Verify
+kubectl get jobs countdown-xfusion
+kubectl describe job countdown-xfusion
+kubectl logs job/countdown-xfusion

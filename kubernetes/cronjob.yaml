@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nautilus
+spec:
+  schedule: "*/12 * * * *"  # Adjust this schedule as needed
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cron-nautilus
+            image: httpd:latest
+            command:
+            - /bin/sh
+            - -c
+            - echo "Welcome to xfusioncorp!"
+          restartPolicy: OnFailure
+
+# Deploy
+kubectl apply -f cr.yml
+
+# Verify
+kubectl get cronjob

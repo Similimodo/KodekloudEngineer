@@ -1,0 +1,39 @@
+# Create Namespace
+kubectl create namespace datacenter
+
+# Create the ConfigMap:
+kubectl create configmap time-config --from-literal=TIME_FREQ=8 -n datacenter
+
+# Create the Pod Definition YAML
+apiVersion: v1
+kind: Pod
+metadata:
+  name: time-check
+  namespace: xfusion
+spec:
+  containers:
+  - name: time-check
+    image: busybox:latest
+    command: ["/bin/sh", "-c", "mkdir -p /opt/sysops/time && while true; do date >> /opt/sysops/time/time-check.log; sleep $TIME_FREQ; done"]
+    env:
+    - name: TIME_FREQ
+      valueFrom:
+        configMapKeyRef:
+          name: time-config
+          key: TIME_FREQ
+    volumeMounts:
+    - name: log-volume
+      mountPath: /opt/sysops/time
+  volumes:
+  - name: log-volume
+    emptyDir: {}
+
+
+# Apply the file
+kubectl apply -f time-check-pod.yaml
+
+# To verify that the log file /opt/sysops/time/time-check.log is being correctly written by the time-check pod, you can follow these steps
+
+kubectl exec -it time-check -n xfusion -- /bin/sh
+cat /opt/sysops/time/time-check.log
+

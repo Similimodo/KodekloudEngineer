@@ -1,0 +1,8 @@
+# Edit the service
+kubectl edit service nginx-service
+
+# Change the Replicas Count
+kubectl scale deployment nginx-deployment --replicas=5
+
+# Update the Image
+kubectl set image deployment/nginx-deployment nginx=nginx:latest

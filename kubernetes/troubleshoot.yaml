@@ -1,0 +1,8 @@
+# Check the issue with the pod
+Kubectl get pods
+kubectl describe pod webserver 
+
+# I see the image is httpd:latests instead of httpd:latest
+
+# To correct this run Kubectl patch command
+kubectl patch pod webserver -p '{"spec":{"containers":[{"name":"httpd-container","image":"httpd:latest"}]}}'
